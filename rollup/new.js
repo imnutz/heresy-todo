@@ -1,8 +1,9 @@
 import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 import includePaths from 'rollup-plugin-includepaths';
 import { terser } from 'rollup-plugin-terser';
 export default {
-  input: '../esm/index.js',
+  input: '../application.js',
   plugins: [
     includePaths({
       include: {
@@ -15,6 +16,11 @@ export default {
       },
     }),
     resolve({module: true}),
+    commonjs({
+      namedExports: {
+        "sam-pattern": ["createInstance", "api"]
+      }
+    }),
     terser()
   ],
   context: 'null',

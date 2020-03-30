@@ -1,10 +1,17 @@
 import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 export default {
-  input: '../esm/index.js',
+  input: '../application.js',
   plugins: [
     resolve({module: true}),
+    commonjs({
+      namedExports: {
+        "sam-pattern": ["createInstance", "api"]
+      }
+    }),
+
     babel({presets: ["@babel/preset-env"]}),
     terser()
   ],

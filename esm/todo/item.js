@@ -7,7 +7,7 @@ export default {
 
   onclick(event) {
     event.stopPropagation();
-    this.dispatchEvent(new Event('delete', {bubbles: true}));
+    this.dispatchEvent(new CustomEvent('delete', {bubbles: true, detail: {id: this.value.id}}));
   },
 
   render() {

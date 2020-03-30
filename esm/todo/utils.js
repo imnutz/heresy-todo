@@ -1,6 +1,7 @@
 const db = Object.create(null);
 const storage = name => (db[name] || set(name));
 
+export const STORAGE_KEY = ":todo-heresy";
 export const data = name => {
   const info = storage(name);
   if (!info.id) {
@@ -8,6 +9,10 @@ export const data = name => {
     info.items = {};
   }
   return info;
+};
+
+export const update = (name, data) => {
+  db[name] = data;
 };
 
 function handleEvent() {
